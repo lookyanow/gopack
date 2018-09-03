@@ -1,14 +1,30 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
+
+func filter(numbers []int, callback func(int) bool) ([]int, []int) {
+	xsEven := []int{}
+	xsOdd := []int{}
+
+	for _, n := range numbers {
+		if callback(n) {
+			xsEven = append(xsEven, n)
+		} else {
+			xsOdd = append(xsOdd, n)
+		}
+
+	}
+	return xsEven, xsOdd
+}
+
+func checkNum(n int) bool {
+	return n%2 == 0
+}
 
 func main() {
-	fmt.Println("Test print")
-	x := 10
-	y := 5
-	fmt.Println(sum(x, y))
-	fmt.Println(sub(x, y))
-
+	xs1, xs2 := filter([]int{1, 2, 3, 4, 5, 6, 7, 8}, checkNum)
+	fmt.Println(xs1)
+	fmt.Println(xs2)
+	fmt.Println(len(xs1))
+	fmt.Println(len(xs2))
 }
